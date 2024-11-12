@@ -1,0 +1,30 @@
+name: Run ROY Workflow
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '*/30 * * * *'
+
+jobs:
+  run_vip_workflow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: binary by @ROYxOWNER
+        run: chmod +x ROY
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install required packages
+        run: |
+          pip install pymongo python-telegram-bot pyTelegramBotAPI certifi
+
+      - name: Run ROY.py
+        run: python3 ROY.py
